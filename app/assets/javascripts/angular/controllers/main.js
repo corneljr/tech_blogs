@@ -50,7 +50,7 @@ angular
 
 			$scope.upvote = function(post, date) {
 				post.vote_count += 1
-				$scope.postList[date].update(post)
+				$scope.postList.update(post)
 			};
 
 		}]);
