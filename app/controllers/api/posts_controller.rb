@@ -6,13 +6,13 @@ class Api::PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.create(note_params)
+		@post = Post.create(post_params)
 		render json: @post
 	end
 
 	def update
 		@post = Post.find(params[:id])
-		if @post.update(note_params)
+		if @post.update(post_params)
 			render json: @post
 		else
 			render json: {success: false}
@@ -21,8 +21,8 @@ class Api::PostsController < ApplicationController
 
 private
 	
-	def note_params
-		params.require(:post).permit(:title, :url, :tagline)
+	def post_params
+		params.require(:post).permit(:title, :url, :tagline, :vote_count)
 	end
 
 end
