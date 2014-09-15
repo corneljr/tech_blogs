@@ -25,12 +25,17 @@ angular
 		    return i + "th";
 		  };
 
-			$scope.save = function(post) {
-				var date = new Date();
+		  function getDateString() {
+		  	var date = new Date();
 				var day = getSuffix(date.getDate());
 				var month = monthNames[date.getMonth()];
 				var dateString = month + ' ' + day
-				console.log(dateString);
+				return dateString
+		  }
+
+			$scope.save = function(post) {
+
+				var dateString = getDateString();
 
 				if ($scope.postList[dateString]) {
 					$scope.postList[dateString].push(post);
@@ -38,9 +43,14 @@ angular
 					$scope.postList[dateString] = []
 					$scope.postList[dateString].push(post);
 				};
-				
+
 				post.$save();
 				$scope.newPost = new Post();
+			};
+
+			$scope.upvote = function(post, date) {
+				post.vote_count += 1
+				$scope.postList[date].update(post)
 			};
 
 		}]);

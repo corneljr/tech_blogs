@@ -3,12 +3,11 @@
 	<ul ng-repeat='(date, posts) in postList'>
 		<h1>{{ date }}</h1>
 		<li ng-repeat='post in posts'>
-			<button ng-click='upvote(post)'></button>
+			<p>{{ post.vote_count }}</p>
+			<button ng-click='upvote(post, date)'></button>
 			<a href="{{ post.url }}">{{ post.title }}</a>
 		</li>
 	</ul>
-
-
 
 	<form id='post-form' ng-submit='save(newPost)'>
 		<input type='text' placeholder='Blog Title' ng-model='newPost.title'>
