@@ -1,7 +1,7 @@
 class Api::PostsController < ApplicationController
 
 	def index
-		@posts = Post.all
+		@posts = Post.all.group_by { |post| post.created_at.strftime("%B #{post.created_at.day.ordinalize}") }
 		render json: @posts
 	end
 
