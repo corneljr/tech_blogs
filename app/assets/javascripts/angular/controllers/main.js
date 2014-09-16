@@ -1,9 +1,10 @@
 angular
 	.module('app')
-	.controller('MainController', ['Post', '$scope', 
-		function(Post, $scope) {
+	.controller('MainController', ['User','Post', '$scope', 
+		function(User, Post, $scope) {
 
 			$scope.postList = Post.get();
+			$scope.user = User
 
 			$scope.newPost = new Post();
 
