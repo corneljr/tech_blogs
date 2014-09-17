@@ -1,12 +1,31 @@
 angular
 	.module('app')
-	.controller('MainController', ['User','Post', '$scope', 
-		function(User, Post, $scope) {
+	.controller('MainController', ['Votes', '$http', 'User','Post', '$scope', 
+		function(Votes, $http, User, Post, $scope) {
 
 			$scope.postList = Post.get();
-			$scope.user = User
 
 			$scope.newPost = new Post();
+
+			Votes.getVotes().success( function(data) {
+				$scope.votes = data;
+			});
+
+			User.getSession().success( function(data) {
+				if (data.status) {
+					console.log(true)
+					$scope.user = {
+						isLogged: true,
+						email: data.user.email
+					};
+				} else {
+					console.log(false)
+					$scope.user = {
+						isLogged: false,
+						email: ''
+					};
+				}
+			});
 
 			var monthNames = [ "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December" ];
@@ -52,6 +71,8 @@ angular
 			$scope.upvote = function(post, date) {
 				post.vote_count += 1
 				Post.update(post)
+
+				$http.post('/api/votes', {post_id: post.id})
 			};
 
 		}]);

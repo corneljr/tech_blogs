@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do 
     resources :posts
+    resources :votes, only: [:create, :index]
   end
 
 end

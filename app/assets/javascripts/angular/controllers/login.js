@@ -2,7 +2,19 @@ angular
 	.module('app')
 	.controller('loginController', ['User', '$http', '$scope', function(User, $http, $scope) {
 
-		$scope.user = User
+		User.getSession().success( function(data) {
+			if (data.status) {
+				$scope.user = {
+					isLogged: true,
+					email: data.user.email
+				};
+			} else {
+				$scope.user = {
+					isLogged: false,
+					email: ''
+				};
+			}
+		});
 
 		$scope.login = function(user) {
 			$http({
