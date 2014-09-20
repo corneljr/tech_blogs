@@ -5,7 +5,7 @@
 		<h1>{{ date }}</h1>
 		<li ng-repeat='post in posts'>
 			<p>{{ post.vote_count }}</p>
-			<button ng-click='upvote(post)' ng-disabled='currentUser && hasVoted(post.id)'></button>
+			<button ng-click='upvote(post)' ng-disabled='!currentUser || hasVoted(post.id)'></button>
 			<a href="{{ post.url }}">{{ post.title }}</a>
 		</li>
 	</ul>

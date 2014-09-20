@@ -55,16 +55,15 @@ angular
 			$scope.upvote = function(post, date) {
 				post.vote_count += 1
 				Post.update(post)
-
+				$scope.votes.push(post.id);
 				$http.post('/api/votes', {post_id: post.id})
 			};
 
 			$scope.hasVoted = function(id) {
-				if ($scope.votes) {
-					result = $scope.votes.indexOf(id) > -1
-					return result
+				if ($scope.votes && $scope.votes.indexOf(id) > -1) {
+					return true;
 				} else {
-					return false
+					return false;
 				};
 			};
 
