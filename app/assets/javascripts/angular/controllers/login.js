@@ -3,7 +3,6 @@ angular
 	.controller('loginController', ['AuthService', '$scope', '$rootScope', function(AuthService, $rootScope, $scope) {
 
 		AuthService.getSession().then( function(user) {
-			console.log(user)
 			if (user) {
 				$scope.setCurrentUser(user);
 			};

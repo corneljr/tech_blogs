@@ -59,4 +59,13 @@ angular
 				$http.post('/api/votes', {post_id: post.id})
 			};
 
+			$scope.hasVoted = function(id) {
+				if ($scope.votes) {
+					result = $scope.votes.indexOf(id) > -1
+					return result
+				} else {
+					return false
+				};
+			};
+
 		}]);
