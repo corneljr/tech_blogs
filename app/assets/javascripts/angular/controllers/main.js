@@ -1,7 +1,7 @@
 angular
 	.module('app')
-	.controller('MainController', ['Votes', '$http', 'User','Post', '$scope', 
-		function(Votes, $http, User, Post, $scope) {
+	.controller('MainController', ['Votes', '$http','Post', '$scope', 
+		function(Votes, $http, Post, $scope) {
 
 			$scope.postList = Post.get();
 
@@ -9,22 +9,6 @@ angular
 
 			Votes.getVotes().success( function(data) {
 				$scope.votes = data;
-			});
-
-			User.getSession().success( function(data) {
-				if (data.status) {
-					console.log(true)
-					$scope.user = {
-						isLogged: true,
-						email: data.user.email
-					};
-				} else {
-					console.log(false)
-					$scope.user = {
-						isLogged: false,
-						email: ''
-					};
-				}
 			});
 
 			var monthNames = [ "January", "February", "March", "April", "May", "June",
