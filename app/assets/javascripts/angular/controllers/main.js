@@ -3,7 +3,10 @@ angular
 	.controller('MainController', ['Votes', '$http','Post', '$scope', 
 		function(Votes, $http, Post, $scope) {
 
-			$scope.postList = Post.get();
+			Post.get( function(data) {
+				$scope.postList = data
+			}, function(err) {
+			});
 
 			$scope.newPost = new Post();
 

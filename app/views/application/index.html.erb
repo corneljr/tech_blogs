@@ -1,14 +1,14 @@
 <section ng-controller='MainController'>
 	<h1>Welcome to Tech Blogs</h1>
-	<p>{{ !!currentUser }}</p>
-	<ul ng-repeat='(date, posts) in postList'>
-		<h1>{{ date }}</h1>
-		<li ng-repeat='post in posts'>
-			<p>{{ post.vote_count }}</p>
-			<button ng-click='upvote(post)' ng-disabled='!currentUser || hasVoted(post.id)'></button>
-			<a href="{{ post.url }}">{{ post.title }}</a>
-		</li>
-	</ul>
+	<ul ng-repeat="posts in postList | orderObjectBy:'created_at':true">
+    <h1>{{ posts.__originalKey }}</h1>
+    <li ng-repeat='post in posts | orderBy:"vote_count":true'>
+      <p>{{ post.vote_count }}</p>
+      <button ng-click='upvote(post)' ng-disabled='!currentUser || hasVoted(post.id)'></button>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  </ul> 
+
 
 	<form id='post-form' ng-if='currentUser' ng-submit='save(newPost)'>
 		<input type='text' placeholder='Blog Title' ng-model='newPost.title'>
