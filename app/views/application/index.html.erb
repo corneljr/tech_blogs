@@ -4,7 +4,9 @@
     <h1>{{ posts.__originalKey }}</h1>
     <li ng-repeat='post in posts | orderBy:"vote_count":true'>
       <p>{{ post.vote_count }}</p>
-      <button ng-click='upvote(post)' ng-disabled='!currentUser || hasVoted(post.id)'></button>
+      <div class= 'glyphicon glyphicon-fire' ng-click='toggleVote(post)' ng-class="hasVoted(post.id) ? 'selected' : '' " >
+      	<span  ></span>
+      </div>
       <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
   </ul> 
@@ -26,3 +28,9 @@
 		<input type="submit">
 	</form>
 </section>
+
+<style>
+	.selected {
+		color: orange;
+	}
+</style>

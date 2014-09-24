@@ -55,11 +55,19 @@ angular
 				$scope.newPost = new Post();
 			};
 
-			$scope.upvote = function(post, date) {
-				post.vote_count += 1
-				Post.update(post)
-				$scope.votes.push(post.id);
-				$http.post('/api/votes', {post_id: post.id})
+			$scope.toggleVote = function(post) {
+
+				if ($scope.hasVoted(post.id)) {
+					post.vote_count -= 1;
+					Post.update(post);
+					var index = $scope.votes.indexOf(post.id);
+					$scope.votes.splice(index,1);
+				} else {
+					post.vote_count += 1;
+					Post.update(post);
+					$scope.votes.push(post.id);
+					$http.post('/api/votes', {post_id: post.id});
+				};
 			};
 
 			$scope.hasVoted = function(id) {
