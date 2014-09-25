@@ -58,15 +58,21 @@ angular
 			$scope.toggleVote = function(post) {
 
 				if ($scope.hasVoted(post.id)) {
+
 					post.vote_count -= 1;
 					Post.update(post);
+					Votes.unVote(post.id);
+
 					var index = $scope.votes.indexOf(post.id);
 					$scope.votes.splice(index,1);
+
 				} else {
+
 					post.vote_count += 1;
 					Post.update(post);
 					$scope.votes.push(post.id);
 					$http.post('/api/votes', {post_id: post.id});
+
 				};
 			};
 

@@ -6,10 +6,16 @@ class Api::VotesController < ApplicationController
 
 	def index
 		if current_user
-			@votes = current_user.votes.pluck(:post_id)
+			@votes = current_user.votes.pluck(:post_id).uniq!
 			render json: @votes
 		else
 			render json: {status: false}
 		end
+	end
+
+	def unvote
+		@vote = current_user.votes.find(params[:id])
+		@vote.destroy
+		render nothing: true
 	end
 end

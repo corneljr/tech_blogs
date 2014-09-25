@@ -4,6 +4,9 @@ angular
 		return {
 			getVotes: function() {
 				return $http.get('api/votes');
+			},
+			unVote: function(id) {
+				return $http.post('api/unvote/' + id)
 			}
 		};
 	}]);
