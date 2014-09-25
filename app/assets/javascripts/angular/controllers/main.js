@@ -12,6 +12,7 @@ angular
 
 			Votes.getVotes().success( function(data) {
 				$scope.votes = data;
+				console.log($scope.votes);
 			});
 
 			var monthNames = [ "January", "February", "March", "April", "May", "June",

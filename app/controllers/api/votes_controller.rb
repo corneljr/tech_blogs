@@ -14,8 +14,9 @@ class Api::VotesController < ApplicationController
 	end
 
 	def unvote
-		@vote = current_user.votes.find(params[:id])
-		@vote.destroy
+		binding.pry
+		@vote = current_user.votes.where(post_id: params[:id])
+		@vote.destroy_all
 		render nothing: true
 	end
 end

@@ -6,7 +6,7 @@ angular
 				return $http.get('api/votes');
 			},
 			unVote: function(id) {
-				return $http.post('api/unvote/' + id)
+				return $http.post('api/votes/' + id + '/destroy')
 			}
 		};
 	}]);

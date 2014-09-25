@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do 
     resources :posts
     resources :votes, only: [:create, :index]
-    post 'votes/:id', to: 'votes#unvote', as: 'unvote'
+    post 'votes/:id/destroy', to: 'votes#unvote', as: 'unvote'
   end
 
 end
