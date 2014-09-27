@@ -1,24 +1,66 @@
 <section ng-controller='MainController'>
-	<h1>Welcome to Tech Blogs</h1>
-	<ul ng-repeat="posts in postList | orderObjectBy:'created_at':true">
-    <h1>{{ posts.__originalKey }}</h1>
+
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">TechBlogs</a>
+	    </div>
+	    <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	      	<li><a href="#" data-toggle='modal' data-target='#newPost'>+</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Separated link</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">One more separated link</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+	<ul ng-repeat="posts in postList | orderObjectBy:'created_at':true" class='date-list'>
+    <h3>{{ posts.__originalKey }}</h3>
     <li ng-repeat='post in posts | orderBy:"vote_count":true'>
-      <p>{{ post.vote_count }}</p>
-      <div class= 'glyphicon glyphicon-fire' ng-click='toggleVote(post)' ng-class="hasVoted(post.id) ? 'selected' : '' " >
-      	<span  ></span>
+    	<div class='col-md-1'>
+	      <div class= 'glyphicon glyphicon-arrow-up' ng-click='toggleVote(post)' ng-class="hasVoted(post.id) ? 'selected' : '' " >
+	      	<span></span>
+	      </div>
+	      {{ post.vote_count }}
       </div>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <p>{{ hasVoted(post.id) }}</p>
+      <div class='post-content col-md-11'>
+     		<a href="{{ post.url }}">{{ post.title }}</a>
+      	<p>{{ post.tagline }}</p>
+      </div>
     </li>
   </ul> 
 
-
-	<form id='post-form' ng-if='currentUser' ng-submit='save(newPost)'>
-		<input type='text' placeholder='Blog Title' ng-model='newPost.title'>
-		<input type="text" placeholder='Blog Tagline' ng-model='newPost.tagline'>
-		<input type="text" placeholder='Blog URL' ng-model='newPost.url'>
-		<input type="submit">
-	</form>
+	<div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class='modal-dialog'>
+			<div class='modal-content'>
+				<div class='modal-header'>
+					<h3>New Post</h3>
+				</div>
+				<div class='modal-body'>
+					<form id='post-form' ng-if='currentUser' ng-submit='save(newPost)'>
+						<input type='text' class='form-control' placeholder='Blog Title' ng-model='newPost.title'>
+						<br>
+						<input type="text" class='form-control' placeholder='Blog Tagline' ng-model='newPost.tagline'>
+						<br>
+						<input type="text" class='form-control' placeholder='Blog URL' ng-model='newPost.url'>
+						<br>
+						<input type="submit" class='btn btn-primary'>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </section>
 
@@ -34,4 +76,18 @@
 	.selected {
 		color: orange;
 	}
+
+	.date-list {
+		list-style: none;
+	}
+
+	.container-fluid {
+		padding-left: 75px;
+		padding-right: 75px;
+	}
+
+	.post-content {
+
+	}
 </style>
+

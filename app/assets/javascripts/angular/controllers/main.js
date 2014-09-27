@@ -3,7 +3,7 @@ angular
 	.controller('MainController', ['Votes', '$http','Post', '$scope', 
 		function(Votes, $http, Post, $scope) {
 
-			Post.get( function(data) {
+			Post.get({}, function(data) {
 				$scope.postList = data
 			}, function(err) {
 			});
@@ -12,7 +12,6 @@ angular
 
 			Votes.getVotes().success( function(data) {
 				$scope.votes = data;
-				console.log($scope.votes);
 			});
 
 			var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -76,6 +75,10 @@ angular
 
 				};
 			};
+
+			$scope.getComments = function(id) {
+				$scope.comments = Comment.get(id);
+			}
 
 			$scope.hasVoted = function(id) {
 				if ($scope.votes && $scope.votes.indexOf(id) > -1) {

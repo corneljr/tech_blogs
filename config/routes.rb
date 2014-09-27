@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   root to: 'application#index'
 
   namespace :api, defaults: {format: :json} do 
-    resources :posts
+    resources :posts do 
+    	resources :comments, only: [:index, :create, :destroy]
+    end
+    
     resources :votes, only: [:create, :index]
     post 'votes/:id/destroy', to: 'votes#unvote', as: 'unvote'
   end
